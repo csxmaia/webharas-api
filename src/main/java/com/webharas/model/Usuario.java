@@ -13,12 +13,20 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private String nome;
+	
 	private String email;
+	
 	private String senha;
+	
 	private String cpf;
+	
 	private String telefone;
+	
 	private String whatsapp;
+	
+	private Long cidade_id;
 	
 	public Long getId() {
 		return id;
@@ -61,5 +69,11 @@ public class Usuario {
 	}
 	public void setWhatsapp(String whatsapp) {
 		this.whatsapp = whatsapp;
+	}
+	public Long getCidade_id() {
+		return cidade_id;
+	}
+	public void setCidade_id(Long cidade_id) {
+		this.cidade_id = cidade_id;
 	}
 }

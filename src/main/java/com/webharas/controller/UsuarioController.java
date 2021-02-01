@@ -3,9 +3,15 @@ package com.webharas.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,17 +34,39 @@ public class UsuarioController {
 		this.usuarioService = usuarioService;
 	}
 	
-	@GetMapping("/getAll")
-	@ApiOperation(value="Lista de usuarios")
-	public List<Usuario> listarUsuarios(){
-		return usuarioService.findAll();
+	@GetMapping()
+	@ApiOperation(value="Lista de Usuarios")
+	public ResponseEntity<List<Usuario>> listarUsuarios(){
+		List<Usuario> usuarios = usuarioService.findAll();
+		return ResponseEntity.ok(usuarios);
 	}
 	
-	@GetMapping("/getById/{id}")
-	public Usuario listarUsuario(@PathVariable(value="id") long id) {
-//		System.out.println(id);
-		return usuarioService.findById(id);
+	@GetMapping("/{id}")
+	@ApiOperation(value="Usuario")
+	public ResponseEntity<Usuario> listarUsuario(@PathVariable(value="id") long id) {
+		Usuario usuario = usuarioService.findById(id);
+		return ResponseEntity.ok(usuario);
 	}
-//	new ResponseEntity("Product saved successfully", HttpStatus.OK);
+	
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Salvar Usuario")
+	public ResponseEntity<String> saveUsuario(@RequestBody Usuario usuario) {
+		usuarioService.save(usuario);
+		return ResponseEntity.ok("Usuario salvo com sucesso");
+	}
+	
+	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Alterar Usuario")
+	public ResponseEntity<String> updateUsuario(@RequestBody Usuario usuario, @PathVariable(value="id") long id) {
+		usuarioService.update(id, usuario);
+		return ResponseEntity.ok("Usuario atualizado com sucesso");
+	}
+	
+	@DeleteMapping(path = "/{id}")
+	@ApiOperation(value="Deletar Usuario")
+	public ResponseEntity<String> deleteUsuario(@PathVariable(value="id") long id) {
+		usuarioService.delete(id);
+		return ResponseEntity.ok("Usuario deletado com sucesso");
+	}
 	
 }
