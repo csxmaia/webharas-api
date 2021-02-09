@@ -5,6 +5,6 @@ import com.webharas.model.Video;
 
 public interface VideoRepository extends JpaRepository<Video, Long> {
 	
-	Video FindById(long id);
+	Video findById(long id);
 
 }

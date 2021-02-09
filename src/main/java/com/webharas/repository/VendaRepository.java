@@ -6,6 +6,6 @@ import com.webharas.model.Venda;
 
 public interface VendaRepository extends JpaRepository<Venda, Long> {
 	
-	Venda fingById(long id);
+	Venda findById(long id);
 
 }

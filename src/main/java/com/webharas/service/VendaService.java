@@ -19,7 +19,7 @@ public class VendaService {
 	}
 	
 	public Venda findById(long id) {
-		return vendaRepository.fingById(id);
+		return vendaRepository.findById(id);
 	}
 	
 	public Venda save(Venda venda) {

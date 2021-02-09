@@ -19,7 +19,7 @@ public class VideoService {
 	}
 	
 	public Video FindById(long id){
-		return videoRepository.FindById(id);
+		return videoRepository.findById(id);
 	}
 	
 	public Video save(Video video) {
