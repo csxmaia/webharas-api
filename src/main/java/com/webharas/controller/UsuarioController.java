@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webharas.DTO.UsuarioLoginRequestDTO;
 import com.webharas.model.Usuario;
 import com.webharas.service.UsuarioService;
 
+import com.webharas.model.exceptions.FailedAuth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -32,6 +34,17 @@ public class UsuarioController {
 	
 	public UsuarioController(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
+	}
+	
+	@PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Salvar Usuario")
+	public ResponseEntity<String> doLogin(@RequestBody UsuarioLoginRequestDTO usuario) throws FailedAuth {
+		try {
+			String user = usuarioService.login(usuario);	
+			return ResponseEntity.ok("Login realizado "+user);
+		}catch (Exception e) {
+            throw new FailedAuth();
+		}
 	}
 	
 	@GetMapping()

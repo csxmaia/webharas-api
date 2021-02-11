@@ -2,6 +2,9 @@ package com.webharas.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.sun.istack.NotNull;
+
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,18 +17,25 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@NotNull
 	private String nome;
 	
+	@NotNull
 	private String email;
 	
+	@NotNull
 	private String senha;
 	
+	@NotNull
 	private String cpf;
 	
+	@NotNull
 	private String telefone;
 	
+	@NotNull
 	private String whatsapp;
 	
+	@NotNull
 	private Long cidade_id;
 	
 	public Long getId() {
