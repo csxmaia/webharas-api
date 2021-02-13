@@ -1,6 +1,8 @@
 package com.webharas.model;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +16,16 @@ public class Venda {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private Date data;
 	
+	@Column(nullable = false)
 	private String quantidade;
 	
+	@Column(nullable = false)
 	private Long cavalo_id;
 	
+	@Column(nullable = false)
 	private Long usuario_id;
 
 	public Long getId() {

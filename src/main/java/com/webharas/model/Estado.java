@@ -3,6 +3,7 @@ package com.webharas.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -20,12 +21,15 @@ public class Estado {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nome;
 	
+	@Column(nullable = false)
 	private String sigla;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="estado_id")
+	@Column(nullable = false)
 	private List<Cidade> cidades;
 	
 	public Long getId() {

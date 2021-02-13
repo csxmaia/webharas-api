@@ -1,5 +1,6 @@
 package com.webharas.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +14,10 @@ public class Imagem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String url;
 	
+	@Column(nullable = false)
 	private Long cavalo_id;
 
 	public Long getId() {

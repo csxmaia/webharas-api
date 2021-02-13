@@ -1,5 +1,6 @@
 package com.webharas.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class Genero {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String tipo;
 
 	public Long getId() {

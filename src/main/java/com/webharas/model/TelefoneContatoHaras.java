@@ -1,5 +1,6 @@
 package com.webharas.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -14,8 +15,10 @@ public class TelefoneContatoHaras {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nome;
 	
+	@Column(nullable = false)
 	private String telefone;
 	
 	public Long getId() {

@@ -1,5 +1,6 @@
 package com.webharas.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,14 +14,19 @@ public class Haras {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nome;
 	
+	@Column(nullable = false)
 	private String descricao;
 	
+	@Column(nullable = false)
 	private Long cidade_id;
 	
+	@Column(nullable = false)
 	private Long usuario_id;
 	
+	@Column(nullable = false)
 	private Long contato_id;
 
 	public Long getId() {
