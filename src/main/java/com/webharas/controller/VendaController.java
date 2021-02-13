@@ -3,6 +3,7 @@ package com.webharas.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.server.ResponseStatusException;
 
 import com.webharas.model.Venda;
+import com.webharas.model.exceptions.CavaloNaoDisponivel;
+import com.webharas.model.exceptions.NotFoundException;
 import com.webharas.service.VendaService;
 
 import io.swagger.annotations.Api;
@@ -33,6 +36,23 @@ public class VendaController {
 	
 	public VendaController(VendaService vendaService) {
 		this.vendaService = vendaService;
+	}
+	
+	@PostMapping(path= "/realizar-venda", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Realizar venda")
+	public ResponseEntity<String> realizarVenda(@RequestBody Venda venda) throws CavaloNaoDisponivel {
+		try {
+			vendaService.realizarVenda(venda);
+			return ResponseEntity.ok("venda realizada com sucesso");
+		}catch(NotFoundException ex) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cavalo não encontrado", ex);
+		}
+		catch(CavaloNaoDisponivel ex) {
+			throw new CavaloNaoDisponivel();
+		}
+		catch(NullPointerException ex) {
+			throw new NullPointerException();
+		}
 	}
 	
 	@GetMapping()
