@@ -3,6 +3,7 @@ package com.webharas.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.webharas.model.Cavalo;
+import com.webharas.model.exceptions.NotFoundException;
 import com.webharas.service.CavaloService;
 
 import io.swagger.annotations.Api;
@@ -43,9 +46,13 @@ public class CavaloController {
 	
 	@GetMapping("/{id}")
 	@ApiOperation(value="cavalo")
-	public ResponseEntity<Cavalo> getcavalo(@PathVariable(value="id") long id) {
-		Cavalo cavalo = cavaloService.findById(id);
-		return ResponseEntity.ok(cavalo);
+	public ResponseEntity<Cavalo> getcavalo(@PathVariable(value="id") long id) throws NotFoundException {
+		try {
+			Cavalo cavalo = cavaloService.findById(id);
+			return ResponseEntity.ok(cavalo);
+		} catch (NotFoundException ex) {
+			throw new NotFoundException();
+		}
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

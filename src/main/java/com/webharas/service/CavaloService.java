@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webharas.model.Cavalo;
+import com.webharas.model.exceptions.NotFoundException;
 import com.webharas.repository.CavaloRepository;
 
 @Service
@@ -18,8 +19,12 @@ public class CavaloService {
 		return cavaloRepository.findAll();
 	}
 	
-	public Cavalo findById(long id) {
-		return cavaloRepository.findById(id);
+	public Cavalo findById(long id) throws NotFoundException {
+		Cavalo cavalo = cavaloRepository.findById(id);
+		if(cavalo == null) {
+			throw new NotFoundException();
+		}
+		return cavalo;
 	}
 	
 	public Cavalo save(Cavalo cavalo) {
