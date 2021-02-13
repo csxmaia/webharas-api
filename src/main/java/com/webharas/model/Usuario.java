@@ -17,25 +17,18 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull
 	private String nome;
 	
-	@NotNull
 	private String email;
 	
-	@NotNull
 	private String senha;
 	
-	@NotNull
 	private String cpf;
 	
-	@NotNull
 	private String telefone;
 	
-	@NotNull
 	private String whatsapp;
 	
-	@NotNull
 	private Long cidade_id;
 	
 	public Long getId() {

@@ -1,11 +1,15 @@
 package com.webharas.model;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -42,6 +46,10 @@ public class Cavalo {
 	private Long raca_id;
 	
 	private Long pelagem_id;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="cavalo_id")
+	private List<Imagem> imagens;
 
 	public Long getId() {
 		return id;
@@ -154,7 +162,13 @@ public class Cavalo {
 	public void setPelagem_id(Long pelagem_id) {
 		this.pelagem_id = pelagem_id;
 	}
-	
-	
+
+	public List<Imagem> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
+	}
 
 }

@@ -41,7 +41,7 @@ public class UsuarioController {
 	public ResponseEntity<String> doLogin(@RequestBody UsuarioLoginRequestDTO usuario) throws FailedAuth {
 		try {
 			String user = usuarioService.login(usuario);	
-			return ResponseEntity.ok("Login realizado "+user);
+			return ResponseEntity.ok("Login realizado, bem vindo "+user);
 		}catch (Exception e) {
             throw new FailedAuth();
 		}
