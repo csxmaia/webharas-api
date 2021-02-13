@@ -36,6 +36,13 @@ public class TelefoneContatoHarasController {
 		this.telefoneContatoHarasService = telefoneContatoHarasService;
 	}
 	
+	@PostMapping(path="/return", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Salvar Telefone e retornar ID")
+	public ResponseEntity<TelefoneContatoHaras> saveTelefoneContatoHarasReturnId(@RequestBody TelefoneContatoHaras telefoneContatoHaras) {
+		TelefoneContatoHaras telefone = telefoneContatoHarasService.save(telefoneContatoHaras);
+		return ResponseEntity.ok(telefone);
+	}
+	
 	@GetMapping()
 	@ApiOperation(value="Lista de Telefone Contato Haras")
 	public ResponseEntity<List<TelefoneContatoHaras>> listarTelefoneContatoHaras(){

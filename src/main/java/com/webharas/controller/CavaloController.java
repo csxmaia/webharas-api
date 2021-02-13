@@ -37,6 +37,13 @@ public class CavaloController {
 		this.cavaloService = cavaloService;
 	}
 	
+	@GetMapping("/avenda")
+	@ApiOperation(value="Lista de Cavalo")
+	public ResponseEntity<List<Cavalo>> listarCavalosAVenda(){
+		List<Cavalo> cavalos = cavaloService.findAllAVenda();
+		return ResponseEntity.ok(cavalos);
+	}
+	
 	@GetMapping()
 	@ApiOperation(value="Lista de Cavalo")
 	public ResponseEntity<List<Cavalo>> listarcavalos(){

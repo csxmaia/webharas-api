@@ -15,6 +15,10 @@ public class CavaloService {
 	@Autowired
 	private CavaloRepository cavaloRepository;
 	
+	public List<Cavalo> findAllAVenda() {
+		return cavaloRepository.findAllAVenda();
+	}
+	
 	public List<Cavalo> findAll() {
 		return cavaloRepository.findAll();
 	}
