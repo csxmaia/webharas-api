@@ -47,6 +47,16 @@ public class Cavalo {
 	
 	private Long pelagem_id;
 	
+	private Boolean vendido;
+	
+	public Boolean getVendido() {
+		return vendido;
+	}
+
+	public void setVendido(Boolean vendido) {
+		this.vendido = vendido;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="cavalo_id")
 	private List<Imagem> imagens;
