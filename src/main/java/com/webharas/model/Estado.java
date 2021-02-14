@@ -27,22 +27,16 @@ public class Estado {
 	@Column(nullable = false)
 	private String sigla;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="estado_id")
-	@Column(nullable = false)
-	private List<Cidade> cidades;
-	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name="estado_id")
+//	@Column(nullable = false)
+//	private List<Cidade> cidades;
+//	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public List<Cidade> getCidades() {
-		return cidades;
-	}
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
 	}
 	public String getNome() {
 		return nome;

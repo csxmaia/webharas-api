@@ -2,6 +2,7 @@ package com.webharas.controller;
 
 import java.util.List;
 
+import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webharas.model.Estado;
+import com.webharas.model.exceptions.NotNullException;
 import com.webharas.service.EstadoService;
 
 import io.swagger.annotations.Api;
@@ -50,9 +52,13 @@ public class EstadoController {
 		
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value="Salvar Estado")
-	public ResponseEntity<String> saveEstado(@RequestBody Estado estado) {
-		estadoService.save(estado);
-		return ResponseEntity.ok("Estado salvo com sucesso");
+	public ResponseEntity<String> saveEstado(@RequestBody Estado estado) throws NotNullException {
+		try {
+			estadoService.save(estado);
+			return ResponseEntity.ok("Estado salvo com sucesso");
+		}catch(PropertyValueException ex) {
+			throw new NotNullException();
+		}
 	}
 	
 	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
